@@ -1,4 +1,6 @@
-﻿namespace Fucker;
+﻿using Fucker.Fucker;
+
+namespace Fucker;
 
 public class Program
 {
