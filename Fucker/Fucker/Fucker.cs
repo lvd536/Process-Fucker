@@ -5,16 +5,32 @@ namespace Fucker.Fucker;
 public class Fucker : IFucker
 {
     public string? procName { get; set; }
-    
+    public bool isDebugging { get; set; }
+    public bool isInfinity { get; set; }
+
     public void Start()
     {
         Console.Title = "Fucker | by lvd.";
         Console.WriteLine("Добро пожаловать в Process Fucker!");
-        Console.Write("Выберите название процесса, который будем убивать: ");
         
+        Console.Write("Показывать сводку об убитых процессах? Y/N");
+        if (Console.ReadKey().KeyChar == 'y' || Console.ReadKey().KeyChar == 'Y')
+        {
+            isDebugging = true;
+        }
+        else{ isDebugging = false; }
+        
+        Console.Write("\nСделать процесс автономным? Y/N");
+        if (Console.ReadKey().KeyChar == 'y' || Console.ReadKey().KeyChar == 'Y')
+        {
+            isInfinity = true;
+        }
+        else{ isInfinity = false; }
+        
+        Console.Write("\nВыберите название процесса, который будем убивать: ");
         procName = Console.ReadLine();
 
-        Killer(procName, true, true);
+        Killer(procName, isDebugging, isInfinity);
     }
 
     public void Killer(string proc, bool debug, bool isinfinity)
