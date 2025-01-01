@@ -16,15 +16,6 @@ class WatcherProcess
             {
                 Console.WriteLine("Основной процесс был закрыт.");
 
-                Process killerProcess = FindProcessThatKilled(mainProcess.Id);
-
-                if (killerProcess != null)
-                {
-                    Console.WriteLine($"Процесс {killerProcess.ProcessName} (ID: {killerProcess.Id}) закрыл основной процесс.");
-                    killerProcess.Kill();
-                    Console.WriteLine($"Процесс {killerProcess.ProcessName} был закрыт.");
-                }
-
                 mainProcess = StartMainProcess(mainProcessPath);
             }
 
@@ -43,24 +34,5 @@ class WatcherProcess
         Process process = Process.Start(startInfo);
         Console.WriteLine("Основной процесс запущен.");
         return process;
-    }
-
-    static Process FindProcessThatKilled(int mainProcessId)
-    {
-        var query = $"SELECT * FROM Win32_Process WHERE ProcessId = {mainProcessId}";
-        var searcher = new System.Management.ManagementObjectSearcher(query);
-
-        foreach (var item in searcher.Get())
-        {
-            var parentProcessId = Convert.ToInt32(item["ParentProcessId"]);
-            var parentProcess = Process.GetProcessById(parentProcessId);
-
-            if (parentProcess != null)
-            {
-                return parentProcess;
-            }
-        }
-
-        return null;
     }
 }
