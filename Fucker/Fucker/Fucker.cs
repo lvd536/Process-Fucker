@@ -48,14 +48,7 @@ public class Fucker : IFucker
                 Process[] processes = Process.GetProcessesByName(proc);
                 foreach (Process p in processes)
                 {
-                    try
-                    {
-                        p.Kill();
-                    } catch (Exception e) 
-                    {
-                        Console.WriteLine(e);
-                        throw;
-                    }
+                    p.Kill();
 
                     if (debug)
                     {
@@ -79,15 +72,7 @@ public class Fucker : IFucker
             Process[] processes = Process.GetProcessesByName(proc);
             foreach (Process p in processes)
             {
-                try
-                {
-                    p.Kill();
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e);
-                    throw;
-                }
+                p.Kill();
 
                 if (debug)
                 {
@@ -111,16 +96,8 @@ public class Fucker : IFucker
                     Process[] processes = Process.GetProcessesByName(proc[i]);
                     foreach (Process p in processes)
                     {
-                        try
-                        {
-                            p.Kill();
-                        }
-                        catch (Exception e)
-                        {
-                            Console.WriteLine(e);
-                            throw;
-                        }
-
+                        p.Kill();
+                        
                         if (debug)
                         {
                             Console.WriteLine($"Найден подходящий процесс: {p.ProcessName}. ID Процесса: {p.Id} | Процесс успешно устранен!");
@@ -147,15 +124,7 @@ public class Fucker : IFucker
                 Process[] processes = Process.GetProcessesByName(proc[i]);
                 foreach (Process p in processes)
                 {
-                    try
-                    {
-                        p.Kill();
-                    }
-                    catch (Exception e)
-                    {
-                        Console.WriteLine(e);
-                        throw;
-                    }
+                    p.Kill();
 
                     if (debug)
                     {
