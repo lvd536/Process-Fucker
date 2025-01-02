@@ -4,14 +4,13 @@ namespace Fucker.Saver;
 
 public class Saver : ISaver
 {
-    public string Patch { get; set; }
     public int Delay { get; set; }
     public bool IsDebugging { get; set; }
     public bool IsInfinity { get; set; }
 
     public void Checks()
     {
-        Patch = Path.GetTempPath() + "settings.json";
+        string Patch = Path.GetTempPath() + "settings.json";
         Console.WriteLine(Patch);
         if (!File.Exists(Patch))
         {
@@ -35,7 +34,7 @@ public class Saver : ISaver
                 default: IsInfinity = false; break;
             }
 
-            Console.Write("\nНапишите задержку между снятиями процессов в миллисекундах");
+            Console.Write("\nНапишите задержку между снятиями процессов в миллисекундах: ");
             try
             {
                 Delay = Convert.ToInt32(Console.ReadLine());
@@ -61,7 +60,6 @@ public class Saver : ISaver
             this.IsDebugging = decomp.IsDebugging;
             this.IsInfinity = decomp.IsInfinity;
             this.Delay = decomp.Delay;
-            Console.WriteLine("Test");
         }
     }
     public Saver() { }
@@ -72,8 +70,5 @@ public class Saver : ISaver
         delay = this.Delay;
         isDebugging = this.IsDebugging;
         isInfinity = this.IsInfinity;
-        Console.WriteLine(delay);
-        Console.WriteLine(isDebugging);
-        Console.WriteLine(isInfinity);
     }
 }
