@@ -8,14 +8,14 @@ class WatcherProcess
     {
         string executableDirectory = AppDomain.CurrentDomain.BaseDirectory;
         string mainProcessPath = Path.Combine(executableDirectory, "Fucker.exe");
-        
+        int defCount = 0;
         Process mainProcess = StartMainProcess(mainProcessPath);
         while (true)
         {
             if (mainProcess.HasExited)
             {
-                Console.WriteLine("Основной процесс был закрыт.");
-
+                defCount++;
+                Console.WriteLine($"Основной процесс был закрыт. | Попыток закрыть приложение: {defCount}");
                 mainProcess = StartMainProcess(mainProcessPath);
             }
 
