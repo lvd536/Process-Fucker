@@ -7,46 +7,52 @@ public class Fucker : IFucker
     public string? procName { get; set; }
     public bool isDebugging { get; set; }
     public bool isInfinity { get; set; }
-    
+
     public List<string>? processes { get; set; }
 
     public void Start()
     {
         Console.Title = "Fucker | by lvd.";
         Console.WriteLine("Добро пожаловать в Process Fucker!");
-        
+
         Console.Write("Показывать сводку об убитых процессах? Y/N");
         if (Console.ReadKey().KeyChar == 'y' || Console.ReadKey().KeyChar == 'Y')
         {
             isDebugging = true;
         }
-        else{ isDebugging = false; }
-        
+        else
+        {
+            isDebugging = false;
+        }
+
         Console.Write("\nСделать процесс автономным? Y/N");
         if (Console.ReadKey().KeyChar == 'y' || Console.ReadKey().KeyChar == 'Y')
         {
             isInfinity = true;
         }
-        else{ isInfinity = false; }
-        
-        Console.Write("\nНапишите список процессов через запятую, которые будем убивать: ");
-        procName = Console.ReadLine();
-        
-        processes = new List<string>();
-        try
+        else
         {
-            string[] procList = procName.Split(',');
+            isInfinity = false;
+        }
 
+        Console.Write("\nНапишите процесс или список процессов через запятую, которые будем убивать: ");
+        procName = Console.ReadLine();
+
+        processes = new List<string>();
+        string[] procList = procName.Split(',');
+        if (procList.Length > 1)
+        {
             for (int i = 0; i < procList.Length; i++)
             {
                 processes.Add(procList[i]);
             }
-            
+
+            Console.WriteLine("Вы выбрали несколько процессов. Начинаем работу");
             Killer(processes, isDebugging, isInfinity);
         }
-        finally
+        else
         {
-            
+            Console.WriteLine("Вы выбрали 1 процесс. Начинаем работу");
             Killer(procName, isDebugging, isInfinity);
         }
     }
@@ -72,9 +78,11 @@ public class Fucker : IFucker
 
                     if (debug)
                     {
-                        Console.WriteLine($"Найден подходящий процесс: {p.ProcessName}. ID Процесса: {p.Id} | Процесс успешно устранен!");
+                        Console.WriteLine(
+                            $"Найден подходящий процесс: {p.ProcessName}. ID Процесса: {p.Id} | Процесс успешно устранен!");
                     }
                 }
+
                 Thread.Sleep(1500);
             }
         }
@@ -101,7 +109,7 @@ public class Fucker : IFucker
             }
         }
     }
-    
+
     public void Killer(List<string> proc, bool debug, bool isinfinity)
     {
         if (isinfinity)
@@ -125,11 +133,12 @@ public class Fucker : IFucker
 
                         if (debug)
                         {
-                            Console.WriteLine($"Найден подходящий процесс: {p.ProcessName}. ID Процесса: {p.Id} | Процесс успешно устранен!");
+                            Console.WriteLine(
+                                $"Найден подходящий процесс: {p.ProcessName}. ID Процесса: {p.Id} | Процесс успешно устранен!");
                         }
                     }
                 }
-                
+
                 Thread.Sleep(1500);
             }
         }
