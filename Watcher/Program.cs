@@ -7,7 +7,8 @@ class WatcherProcess
 {
     static void Main(string[] args)
     {
-        string mainProcessPath = @"C:\Users\lvd\RiderProjects\ProcessFucker\Fucker\bin\Debug\net9.0\Fucker.exe";
+        string executableDirectory = AppDomain.CurrentDomain.BaseDirectory;
+        string mainProcessPath = Path.Combine(executableDirectory, "Fucker.exe");
 
         bool protectProcess;
         Process mainProcess = StartMainProcess(mainProcessPath);
