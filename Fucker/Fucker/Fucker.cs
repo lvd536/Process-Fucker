@@ -5,48 +5,16 @@ namespace Fucker.Fucker;
 public class Fucker : IFucker
 {
     public string? procName { get; set; }
-    public bool isDebugging { get; set; }
-    public bool isInfinity { get; set; }
-
-    public int Delay { get; set; }
+    public static int delay { get; set; }
+    public static bool isDebugging { get; set; }
+    public static bool isInfinity { get; set; }
 
     public List<string>? processes { get; set; }
-
     public void Start()
     {
         Console.Title = "Fucker | by lvd.";
         Console.WriteLine("Добро пожаловать в Process Fucker!");
-
-        Console.Write("Показывать сводку об убитых процессах? Y/N");
-        switch (Console.ReadKey().KeyChar)
-        {
-            case 'Y': isDebugging = true; break;
-            
-            case 'y': isDebugging = true; break;
-            
-            default: isDebugging = false; break;
-        }
-        
-        Console.Write("\nСделать процесс автономным? Y/N");
-        switch (Console.ReadKey().KeyChar)
-        {
-            case 'Y': isInfinity = true; break;
-            
-            case 'y': isInfinity = true; break;
-            
-            default: isInfinity = false; break;
-        }
-
-        Console.Write("\nНапишите задержку между снятиями процессов в миллисекундах");
-        try
-        {
-            Delay = Convert.ToInt32(Console.ReadLine());
-        }
-        catch (FormatException)
-        {
-            Delay = 1500;
-            Console.WriteLine($"Значение введено неверно. Установили базовое значение в {Delay} миллисекунд");
-        }
+        Saver.Saver JSON = new Saver.Saver(delay, isInfinity, isDebugging);
         Console.Write("\nНапишите процесс или список процессов через запятую, которые будем убивать: ");
         procName = Console.ReadLine() ?? "";
 
@@ -60,16 +28,16 @@ public class Fucker : IFucker
             }
 
             Console.WriteLine("Вы выбрали несколько процессов. Начинаем работу");
-            Killer(processes, isDebugging, isInfinity);
+            Killer(processes, JSON.IsDebugging, JSON.IsInfinity, JSON.Delay);
         }
         else
         {
             Console.WriteLine("Вы выбрали 1 процесс. Начинаем работу");
-            Killer(procName, isDebugging, isInfinity);
+            Killer(procName, JSON.IsDebugging, JSON.IsInfinity, JSON.Delay);
         }
     }
 
-    public void Killer(string proc, bool debug, bool isinfinity)
+    public void Killer(string proc, bool debug, bool isinfinity, int delay)
     {
         if (isinfinity)
         {
@@ -93,7 +61,7 @@ public class Fucker : IFucker
                     }
                 }
 
-                Thread.Sleep(Delay);
+                Thread.Sleep(delay);
             }
         }
         else
@@ -120,7 +88,7 @@ public class Fucker : IFucker
         }
     }
 
-    public void Killer(List<string> proc, bool debug, bool isinfinity)
+    public void Killer(List<string> proc, bool debug, bool isinfinity, int delay)
     {
         if (isinfinity)
         {
@@ -148,7 +116,7 @@ public class Fucker : IFucker
                     }
                 }
 
-                Thread.Sleep(Delay);
+                Thread.Sleep(delay);
             }
         }
         else
