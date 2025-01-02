@@ -11,5 +11,5 @@ public interface IFucker
     protected List<string>? processes { get; set; }
     
     public void Start();
-    protected void Killer(string proc, bool debug, bool isinfinity);
+    protected void Killer(string proc, bool debug, bool isinfinity, int delay);
 }

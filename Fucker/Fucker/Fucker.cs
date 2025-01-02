@@ -10,7 +10,6 @@ public class Fucker : IFucker
     public static bool isInfinity { get; set; }
 
     public List<string>? processes { get; set; }
-    private Saver.Saver JSON = new Saver.Saver();
     public void Start()
     {
         Console.Title = "Fucker | by lvd.";
@@ -29,16 +28,16 @@ public class Fucker : IFucker
             }
 
             Console.WriteLine("Вы выбрали несколько процессов. Начинаем работу");
-            Killer(processes, JSON.IsDebugging, JSON.IsInfinity);
+            Killer(processes, JSON.IsDebugging, JSON.IsInfinity, JSON.Delay);
         }
         else
         {
             Console.WriteLine("Вы выбрали 1 процесс. Начинаем работу");
-            Killer(procName, JSON.IsDebugging, JSON.IsInfinity);
+            Killer(procName, JSON.IsDebugging, JSON.IsInfinity, JSON.Delay);
         }
     }
 
-    public void Killer(string proc, bool debug, bool isinfinity)
+    public void Killer(string proc, bool debug, bool isinfinity, int delay)
     {
         if (isinfinity)
         {
@@ -62,7 +61,7 @@ public class Fucker : IFucker
                     }
                 }
 
-                Thread.Sleep(JSON.Delay);
+                Thread.Sleep(delay);
             }
         }
         else
@@ -89,7 +88,7 @@ public class Fucker : IFucker
         }
     }
 
-    public void Killer(List<string> proc, bool debug, bool isinfinity)
+    public void Killer(List<string> proc, bool debug, bool isinfinity, int delay)
     {
         if (isinfinity)
         {
@@ -117,7 +116,7 @@ public class Fucker : IFucker
                     }
                 }
 
-                Thread.Sleep(JSON.Delay);
+                Thread.Sleep(delay);
             }
         }
         else
