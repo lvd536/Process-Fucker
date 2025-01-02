@@ -5,7 +5,6 @@ class WatcherProcess
 {
     static void Main(string[] args)
     {
-        string mainProcessName = "Fucker";
         string mainProcessPath = @"C:\Users\lvd\RiderProjects\ProcessFucker\Fucker\bin\Debug\net9.0\Fucker.exe";
 
         Process mainProcess = StartMainProcess(mainProcessPath);
@@ -31,8 +30,8 @@ class WatcherProcess
             UseShellExecute = true
         };
 
-        Process process = Process.Start(startInfo);
+        Process? process = Process.Start(startInfo);
         Console.WriteLine("Основной процесс запущен.");
-        return process;
+        return process ?? throw new NullReferenceException();
     }
 }
