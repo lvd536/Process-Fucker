@@ -48,11 +48,11 @@ public class Fucker : IFucker
             Console.WriteLine($"Значение введено неверно. Установили базовое значение в {Delay} миллисекунд");
         }
         Console.Write("\nНапишите процесс или список процессов через запятую, которые будем убивать: ");
-        procName = Console.ReadLine() ?? ""; // Получаем строку процессов пользователя
+        procName = Console.ReadLine() ?? "";
 
-        processes = new List<string>(); // Выделяем память
-        string[] procList = procName.Split(','); // Пробуем разделить строку на процессы, если их несколько
-        if (procList.Length > 1) // Если список выполняем перегрузку
+        processes = new List<string>();
+        string[] procList = procName.Split(',');
+        if (procList.Length > 1)
         {
             for (int i = 0; i < procList.Length; i++)
             {
@@ -62,7 +62,7 @@ public class Fucker : IFucker
             Console.WriteLine("Вы выбрали несколько процессов. Начинаем работу");
             Killer(processes, isDebugging, isInfinity);
         }
-        else // Если процесс 1 выполняем другое условие
+        else
         {
             Console.WriteLine("Вы выбрали 1 процесс. Начинаем работу");
             Killer(procName, isDebugging, isInfinity);
@@ -81,8 +81,7 @@ public class Fucker : IFucker
                     try
                     {
                         p.Kill();
-                    }
-                    catch (Exception e)
+                    } catch (Exception e) 
                     {
                         Console.WriteLine(e);
                         throw;
@@ -90,8 +89,7 @@ public class Fucker : IFucker
 
                     if (debug)
                     {
-                        Console.WriteLine(
-                            $"Найден подходящий процесс: {p.ProcessName}. ID Процесса: {p.Id} | Процесс успешно устранен!");
+                        Console.WriteLine($"Найден подходящий процесс: {p.ProcessName}. ID Процесса: {p.Id} | Процесс успешно устранен!");
                     }
                 }
 
@@ -145,8 +143,7 @@ public class Fucker : IFucker
 
                         if (debug)
                         {
-                            Console.WriteLine(
-                                $"Найден подходящий процесс: {p.ProcessName}. ID Процесса: {p.Id} | Процесс успешно устранен!");
+                            Console.WriteLine($"Найден подходящий процесс: {p.ProcessName}. ID Процесса: {p.Id} | Процесс успешно устранен!");
                         }
                     }
                 }
@@ -173,8 +170,7 @@ public class Fucker : IFucker
 
                     if (debug)
                     {
-                        Console.WriteLine(
-                            $"Найден подходящий процесс: {p.ProcessName}. ID Процесса: {p.Id} | Процесс успешно устранен!");
+                        Console.WriteLine($"Найден подходящий процесс: {p.ProcessName}. ID Процесса: {p.Id} | Процесс успешно устранен!");
                     }
                 }
             }
