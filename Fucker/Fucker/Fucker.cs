@@ -57,7 +57,7 @@ public class Fucker : IFucker
                         Console.WriteLine($"Найден подходящий процесс: {p.ProcessName}. ID Процесса: {p.Id} | Процесс успешно устранен!");
                     }
                 }
-                Thread.Sleep(3000);
+                Thread.Sleep(1500);
             }
         }
         else

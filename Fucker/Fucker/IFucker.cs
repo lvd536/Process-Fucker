@@ -9,5 +9,5 @@ public interface IFucker
     public bool isInfinity { get; set; }
     
     public void Start();
-    public void Killer(string proc, bool debug, bool isinfinity);
+    protected void Killer(string proc, bool debug, bool isinfinity);
 }
