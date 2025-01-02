@@ -1,6 +1,4 @@
-﻿using System.Diagnostics;
-
-namespace Fucker.Fucker;
+﻿namespace Fucker.Fucker;
 
 public interface IFucker
 {

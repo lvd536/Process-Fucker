@@ -1,6 +1,4 @@
-﻿using Fucker.Fucker;
-
-namespace Fucker;
+﻿namespace Fucker;
 
 public class Program
 {
