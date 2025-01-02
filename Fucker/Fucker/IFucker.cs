@@ -4,11 +4,13 @@ namespace Fucker.Fucker;
 
 public interface IFucker
 {
-    public string? procName { get; set; }
+    protected string? procName { get; set; }
     
-    public bool isDebugging { get; set; }
+    protected bool isDebugging { get; set; }
     
-    public bool isInfinity { get; set; }
+    protected bool isInfinity { get; set; }
+
+    protected int Delay { get; set; }
     
     protected List<string>? processes { get; set; }
     

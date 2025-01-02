@@ -8,6 +8,8 @@ public class Fucker : IFucker
     public bool isDebugging { get; set; }
     public bool isInfinity { get; set; }
 
+    public int Delay { get; set; }
+
     public List<string>? processes { get; set; }
 
     public void Start()
@@ -35,8 +37,18 @@ public class Fucker : IFucker
             default: isInfinity = false; break;
         }
 
+        Console.Write("\nНапишите задержку между снятиями процессов в миллисекундах");
+        try
+        {
+            Delay = Convert.ToInt32(Console.ReadLine());
+        }
+        catch (FormatException)
+        {
+            Delay = 1500;
+            Console.WriteLine($"Значение введено неверно. Установили базовое значение в {Delay} миллисекунд");
+        }
         Console.Write("\nНапишите процесс или список процессов через запятую, которые будем убивать: ");
-        procName = Console.ReadLine(); // Получаем строку процессов пользователя
+        procName = Console.ReadLine() ?? ""; // Получаем строку процессов пользователя
 
         processes = new List<string>(); // Выделяем память
         string[] procList = procName.Split(','); // Пробуем разделить строку на процессы, если их несколько
@@ -83,7 +95,7 @@ public class Fucker : IFucker
                     }
                 }
 
-                Thread.Sleep(1500);
+                Thread.Sleep(Delay);
             }
         }
         else
@@ -139,7 +151,7 @@ public class Fucker : IFucker
                     }
                 }
 
-                Thread.Sleep(1500);
+                Thread.Sleep(Delay);
             }
         }
         else

@@ -1,4 +1,6 @@
 ﻿using System.Diagnostics;
+using System.Net;
+
 namespace Fucker.Watcher;
 
 class WatcherProcess
@@ -7,18 +9,31 @@ class WatcherProcess
     {
         string mainProcessPath = @"C:\Users\lvd\RiderProjects\ProcessFucker\Fucker\bin\Debug\net9.0\Fucker.exe";
 
+        bool protectProcess;
         Process mainProcess = StartMainProcess(mainProcessPath);
 
-        while (true)
+        Console.WriteLine("Включить слежку за основным процессом? Y/N");
+        switch (Console.ReadKey().KeyChar)
         {
-            if (mainProcess.HasExited)
+            case 'Y': protectProcess = true; break;
+            
+            case 'y': protectProcess = true; break;
+            
+            default: protectProcess = false; break;
+        }
+        if (protectProcess)
+        {
+            while (true)
             {
-                Console.WriteLine("Основной процесс был закрыт.");
+                if (mainProcess.HasExited)
+                {
+                    Console.WriteLine("Основной процесс был закрыт.");
 
-                mainProcess = StartMainProcess(mainProcessPath);
+                    mainProcess = StartMainProcess(mainProcessPath);
+                }
+
+                Thread.Sleep(1000);
             }
-
-            Thread.Sleep(1000);
         }
     }
 
