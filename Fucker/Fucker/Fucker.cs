@@ -43,6 +43,8 @@ public class Fucker : IFucker
         {
             while (true)
             {
+                Process cur = Process.GetCurrentProcess();
+                Console.Title = $"Memory usage: {cur.WorkingSet64 / 1024.0 / 1024.0}MB | Launch: {cur.StartTime}";
                 Process[] processes = Process.GetProcessesByName(proc);
                 foreach (Process p in processes)
                 {
@@ -60,7 +62,15 @@ public class Fucker : IFucker
                         Console.WriteLine($"Найден подходящий процесс: {p.ProcessName}. ID Процесса: {p.Id} | Процесс успешно устранен!");
                     }
                 }
-
+                if (cur.WorkingSet64 / 1024.0 / 1024.00 >= 350)
+                {
+                    Console.WriteLine("Collecting Memory");
+                    GC.Collect();
+                    Console.WriteLine("Waiting clear Memory");
+                    GC.WaitForPendingFinalizers();
+                    Console.WriteLine("Last Checks");
+                    GC.Collect();
+                }
                 Thread.Sleep(delay);
             }
         }
@@ -94,6 +104,8 @@ public class Fucker : IFucker
         {
             while (true)
             {
+                Process cur = Process.GetCurrentProcess();
+                Console.Title = $"Memory usage: {cur.WorkingSet64 / 1024.0 / 1024.0}MB | Launch: {cur.StartTime}";
                 for (int i = 0; i < proc.Count; i++)
                 {
                     Process[] processes = Process.GetProcessesByName(proc[i]);
@@ -116,6 +128,15 @@ public class Fucker : IFucker
                     }
                 }
 
+                if (cur.WorkingSet64 / 1024.0 / 1024.00 >= 350)
+                {
+                    Console.WriteLine("Collecting Memory");
+                    GC.Collect();
+                    Console.WriteLine("Waiting clear Memory");
+                    GC.WaitForPendingFinalizers();
+                    Console.WriteLine("Last Checks");
+                    GC.Collect();
+                }
                 Thread.Sleep(delay);
             }
         }
