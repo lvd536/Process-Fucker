@@ -16,31 +16,31 @@ public class Fucker : IFucker
         Console.WriteLine("Добро пожаловать в Process Fucker!");
 
         Console.Write("Показывать сводку об убитых процессах? Y/N");
-        if (Console.ReadKey().KeyChar == 'y' || Console.ReadKey().KeyChar == 'Y')
+        switch (Console.ReadKey().KeyChar)
         {
-            isDebugging = true;
+            case 'Y': isDebugging = true; break;
+            
+            case 'y': isDebugging = true; break;
+            
+            default: isDebugging = false; break;
         }
-        else
-        {
-            isDebugging = false;
-        }
-
+        
         Console.Write("\nСделать процесс автономным? Y/N");
-        if (Console.ReadKey().KeyChar == 'y' || Console.ReadKey().KeyChar == 'Y')
+        switch (Console.ReadKey().KeyChar)
         {
-            isInfinity = true;
-        }
-        else
-        {
-            isInfinity = false;
+            case 'Y': isInfinity = true; break;
+            
+            case 'y': isInfinity = true; break;
+            
+            default: isInfinity = false; break;
         }
 
         Console.Write("\nНапишите процесс или список процессов через запятую, которые будем убивать: ");
-        procName = Console.ReadLine();
+        procName = Console.ReadLine(); // Получаем строку процессов пользователя
 
-        processes = new List<string>();
-        string[] procList = procName.Split(',');
-        if (procList.Length > 1)
+        processes = new List<string>(); // Выделяем память
+        string[] procList = procName.Split(','); // Пробуем разделить строку на процессы, если их несколько
+        if (procList.Length > 1) // Если список выполняем перегрузку
         {
             for (int i = 0; i < procList.Length; i++)
             {
@@ -50,7 +50,7 @@ public class Fucker : IFucker
             Console.WriteLine("Вы выбрали несколько процессов. Начинаем работу");
             Killer(processes, isDebugging, isInfinity);
         }
-        else
+        else // Если процесс 1 выполняем другое условие
         {
             Console.WriteLine("Вы выбрали 1 процесс. Начинаем работу");
             Killer(procName, isDebugging, isInfinity);
